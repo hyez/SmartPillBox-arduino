@@ -80,11 +80,14 @@ void loop(){
 
     Serial.println("angle_chk=0, light=0");
 
+    // 기준 시간 바꿔주기
+    setUserTime(rtc.getHours(), rtc.getMinutes(), rtc.getSeconds(), rtc.getYear(), rtc.getMonth(), rtc.getDay());
+    tm_st = mktime( &user_stime);
     
   }
 
   // 10분동안 알약 안가져가면
-  if(angle_chk == 1 && tm_min >= 2) { // 나중에 10으로 숫자바꾸기
+  if(angle_chk == 1 && tm_min >= 1) { // 나중에 10으로 숫자바꾸기
     digitalWrite(led, HIGH); 
     light_chk = 1;
     Serial.println("light=1");
@@ -96,7 +99,7 @@ void loop(){
   Serial.println(tm_min);
   Serial.println(angle);   
 
-   Serial.print(rtc.getHours(), DEC);
+  Serial.print(rtc.getHours(), DEC);
   Serial.print(":");
   Serial.print(rtc.getMinutes(), DEC);
   Serial.print(":");
